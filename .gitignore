@@ -1,7 +1,6 @@
 *.log
 config.txt
 build/
-figures/
 __pycache__/
 *.exe
 release-version/

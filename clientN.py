@@ -11,7 +11,6 @@ import os
 #     base_path = sys._MEIPASS
 # except Exception:
 base_path = os.path.abspath(".")
-
 corefile = os.path.join(base_path, 'main.py')
 
 process = None  # 存储后台进程的全局变量
@@ -113,6 +112,9 @@ def upload_file():
 root = tk.Tk()
 root.title("md2notionN")
 root.geometry("800x500")
+
+# 添加自定义图标
+root.iconbitmap(os.path.join(base_path, 'icons/md2notionN.ico'))
 
 # Frame for entries and buttons
 frame = ttk.Frame(root, padding="10")

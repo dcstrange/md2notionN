@@ -1,0 +1,4 @@
+*.log
+config.txt
+build/
+figures/

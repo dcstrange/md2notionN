@@ -26,9 +26,10 @@ def upload_single_file(filepath, client, uploader,filename=None, start_line = 0)
     uploader.local_root = os.path.dirname(filepath)
     for i,content in enumerate(notion_blocks):
         if i < start_line:continue    
-        print(f"uploading line {i},............", end = '')
+        print(f"uploading line {i},............", end="\n",flush=True)
         uploader.uploadBlock(content, client.notion, page_id)
-        print('done!')
+        print('done!', end="\n",flush=True)
+    print('Finish Upload.', end="\n",flush=True)
 
 
 if __name__ == '__main__':

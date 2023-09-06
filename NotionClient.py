@@ -14,9 +14,9 @@ class NotionSyncDatabase:
             if  page_title not in self.file_names:
                 self.file_names[page_title] = 1
             else:
-                print(f"WARNING: detect repeat file names:{page_title}")
+                print(f"WARNING: detect repeat file names:{page_title}", end="\n",flush=True)
         self.file_names = list(self.file_names.keys())
-        print(f"this database has totally {len(self.file_names)} unique items")
+        print(f"this database has totally {len(self.file_names)} unique items", end="\n",flush=True)
     def show_items(self):
         full_or_partial_pages = self.notion.databases.query(database_id=self.database_id)                
         for page in full_or_partial_pages["results"]:
@@ -24,7 +24,7 @@ class NotionSyncDatabase:
             name_list = page['properties']['Name']['title']
             if len(name_list) == 0:continue
             page_title = name_list[0]['plain_text']
-            print(f"Name:{page_title} Created at: {page['created_time']} _id:{page['id']}")
+            print(f"Name:{page_title} Created at: {page['created_time']} _id:{page['id']}", end="\n",flush=True)
     def create_new_page(self, page_name, tags=[{"name": "general"}],**kargs):
         new_page = {
             "Name": {"title": [{"text": {"content": page_name}}]},
@@ -32,9 +32,9 @@ class NotionSyncDatabase:
         }
         if page_name not in self.file_names:
             self.notion.pages.create(parent={"database_id": self.database_id}, properties=new_page)
-            print(f"You add {page_name} page into database!")
+            print(f"You add {page_name} page into database!", end="\n",flush=True)
         else:
-            print(f"Use existed {page_name} page in database!")
+            print(f"Use existed {page_name} page in database!", end="\n",flush=True)
     def get_page_id_via_name(self, page_name):
         query_string = {
                 "database_id": self.database_id,
@@ -43,17 +43,17 @@ class NotionSyncDatabase:
         results = self.notion.databases.query(**query_string).get("results")
         no_of_results = len(results)
         if no_of_results == 0:
-            print("No results found.")
+            print("No results found.", end="\n",flush=True)
             return 
 
-        print(f"No.of results found: {len(results)}, choose the first one")
+        print(f"No.of results found: {len(results)}, choose the first one", end="\n",flush=True)
         result = results[0]
-        print(f"The first result is a {result['object']} with id {result['id']}.")
+        print(f"The first result is a {result['object']} with id {result['id']}.", end="\n",flush=True)
         return result['id']   
     
 if __name__ == '__main__':
     # get your token from https://www.notion.so/my-integrations
-    connection_key = "secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    connection_key = "secret_xxxxxxxxxxxxxxxxxxx"
     # get your database id from url https://www.notion.so/xxxxxxx, add '-' manually.
-    database_id    = "88c52f93-7663-497d-93b2-45934c741f39" #<---for example
+    database_id    = "xxxxxxxxxxx" #<---for example
     client         = NotionSyncDatabase(connection_key, database_id)

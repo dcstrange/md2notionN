@@ -221,7 +221,7 @@ class Md2NotionUploader:
     def convert_to_raw_cell(self, line):
         children = { "table_row": {"cells":[]}}
         for content in line:
-            #print(uploader.blockparser(content,'text'))
+            #print(uploader.blockparser(content,'text', end="\n"))
             cell_json =  self.sentence_parser(content)
             children["table_row"]["cells"].append(cell_json)
         return children

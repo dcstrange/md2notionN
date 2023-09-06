@@ -2,3 +2,5 @@
 config.txt
 build/
 figures/
+__pycache__/
+*.exe

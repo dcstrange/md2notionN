@@ -57,12 +57,14 @@ def on_submit():
         file_path_str = file_path.get().strip()
 
         params = {
-            "connection_key": connection_key,
-            "database_id": database_id,
-            "file_path": file_path_str
+            "--connection_key": connection_key,
+            "--database_id": database_id,
+            "--file_path": f"{file_path_str}"
         }
-        args = [f'--{key} {value}' for key, value in params.items()]
-        args = ' '.join(args).split()
+        args = []
+        for key, value in params.items():
+            args.append(key)
+            args.append(value)
 
         process = subprocess.Popen(['python', corefile] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, text=True, bufsize=1)
 
